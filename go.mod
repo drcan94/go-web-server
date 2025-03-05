@@ -5,6 +5,7 @@ go 1.24.0
 require github.com/lib/pq v1.10.9
 
 require (
+	github.com/a-h/templ v0.3.833 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.7.2 // indirect
