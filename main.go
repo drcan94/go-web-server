@@ -17,9 +17,11 @@ var conn *pgx.Conn
 
 // User struct for form data
 type User struct {
-	ID       int
-	Username string
-	Password string
+	ID        int
+	FullName  string
+	Email     string
+	Password  string
+	CreatedAt string
 }
 
 func main() {
@@ -37,11 +39,12 @@ func main() {
 	}
 	defer conn.Close(context.Background())
 
-	// Create users table
+	// Create users table with updated fields
 	_, err = conn.Exec(context.Background(), `
 		CREATE TABLE IF NOT EXISTS users (
 			id SERIAL PRIMARY KEY,
-			username TEXT NOT NULL UNIQUE,
+			full_name TEXT NOT NULL,
+			email TEXT NOT NULL UNIQUE,
 			password TEXT NOT NULL,
 			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 		)
@@ -72,13 +75,13 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username := r.FormValue("username")
+	email := r.FormValue("email")
 	password := r.FormValue("password")
 
 	var dbPassword string
 	err := conn.QueryRow(context.Background(),
-		"SELECT password FROM users WHERE username = $1",
-		username).Scan(&dbPassword)
+		"SELECT password FROM users WHERE email = $1",
+		email).Scan(&dbPassword)
 
 	if err != nil {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
@@ -98,15 +101,16 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username := r.FormValue("username")
+	fullName := r.FormValue("fullname")
+	email := r.FormValue("email")
 	password := r.FormValue("password")
 
 	_, err := conn.Exec(context.Background(),
-		"INSERT INTO users (username, password) VALUES ($1, $2)",
-		username, password)
+		"INSERT INTO users (full_name, email, password) VALUES ($1, $2, $3)",
+		fullName, email, password)
 
 	if err != nil {
-		http.Error(w, "Username already exists", http.StatusBadRequest)
+		http.Error(w, "Email already exists", http.StatusBadRequest)
 		return
 	}
 
