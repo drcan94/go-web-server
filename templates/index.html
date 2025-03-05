@@ -1,28 +1,300 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login System</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="container">
-        <div class="form-container">
-            <h2>Login</h2>
-            <form action="/login" method="POST">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <i class="fas fa-shield-alt"></i>
+          <span>AuthSystem</span>
         </div>
 
-        <div class="form-container">
-            <h2>Register</h2>
-            <form action="/register" method="POST">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Register</button>
-            </form>
+        <button class="nav-toggle" aria-label="toggle navigation">
+          <span class="hamburger"></span>
+        </button>
+
+        <div class="nav-menu">
+          <div class="nav-menu-content">
+            <div class="language-selector">
+              <button class="lang-btn active" data-lang="en">
+                <i class="fas fa-globe"></i>
+                EN
+              </button>
+              <button class="lang-btn" data-lang="tr">
+                <i class="fas fa-globe"></i>
+                TR
+              </button>
+            </div>
+            <div class="theme-toggle">
+              <i class="fas fa-sun"></i>
+              <label class="switch">
+                <input type="checkbox" id="theme-switch" />
+                <span class="slider round"></span>
+              </label>
+              <i class="fas fa-moon"></i>
+            </div>
+          </div>
         </div>
-    </div>
-</body>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="auth-container">
+        <div class="form-container" id="login-form">
+          <h2 data-en="Welcome Back" data-tr="Tekrar Hoşgeldiniz">
+            Welcome Back
+          </h2>
+          <p
+            class="form-subtitle"
+            data-en="Login to your account"
+            data-tr="Hesabınıza giriş yapın"
+          >
+            Login to your account
+          </p>
+
+          <form action="/login" method="POST">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username" required placeholder=" " />
+              <label data-en="Username" data-tr="Kullanıcı Adı">Username</label>
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" required placeholder=" " />
+              <label data-en="Password" data-tr="Şifre">Password</label>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-container">
+                <input type="checkbox" name="remember" />
+                <span class="checkmark"></span>
+                <span data-en="Remember me" data-tr="Beni hatırla"
+                  >Remember me</span
+                >
+              </label>
+              <a
+                href="#"
+                class="forgot-password"
+                data-en="Forgot Password?"
+                data-tr="Şifremi Unuttum?"
+                >Forgot Password?</a
+              >
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <i class="fas fa-sign-in-alt"></i>
+              <span data-en="Login" data-tr="Giriş Yap">Login</span>
+            </button>
+
+            <p class="form-switch">
+              <span data-en="Don't have an account?" data-tr="Hesabınız yok mu?"
+                >Don't have an account?</span
+              >
+              <a href="#" class="switch-form" data-form="register">
+                <span data-en="Register" data-tr="Kayıt Ol">Register</span>
+              </a>
+            </p>
+          </form>
+        </div>
+
+        <div class="form-container hidden" id="register-form">
+          <h2 data-en="Create Account" data-tr="Hesap Oluştur">
+            Create Account
+          </h2>
+          <p
+            class="form-subtitle"
+            data-en="Sign up for free"
+            data-tr="Ücretsiz kayıt olun"
+          >
+            Sign up for free
+          </p>
+
+          <form action="/register" method="POST">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username" required placeholder=" " />
+              <label data-en="Username" data-tr="Kullanıcı Adı">Username</label>
+            </div>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email" required placeholder=" " />
+              <label data-en="Email" data-tr="E-posta">Email</label>
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" required placeholder=" " />
+              <label data-en="Password" data-tr="Şifre">Password</label>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-container">
+                <input type="checkbox" name="terms" required />
+                <span class="checkmark"></span>
+                <span
+                  data-en="I agree to the Terms & Conditions"
+                  data-tr="Şartları ve Koşulları Kabul Ediyorum"
+                >
+                  I agree to the Terms & Conditions
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <i class="fas fa-user-plus"></i>
+              <span data-en="Register" data-tr="Kayıt Ol">Register</span>
+            </button>
+
+            <p class="form-switch">
+              <span
+                data-en="Already have an account?"
+                data-tr="Zaten hesabınız var mı?"
+                >Already have an account?</span
+              >
+              <a href="#" class="switch-form" data-form="login">
+                <span data-en="Login" data-tr="Giriş Yap">Login</span>
+              </a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Mobile menu toggle with improved animation
+      const navToggle = document.querySelector(".nav-toggle");
+      const navMenu = document.querySelector(".nav-menu");
+
+      navToggle.addEventListener("click", () => {
+        requestAnimationFrame(() => {
+          navMenu.style.opacity = "0";
+          navMenu.classList.toggle("show");
+          requestAnimationFrame(() => {
+            navMenu.style.transition =
+              "opacity var(--transition-duration) var(--transition-timing)";
+            navMenu.style.opacity = "1";
+          });
+        });
+        navToggle.classList.toggle("active");
+      });
+
+      // Form switching with improved animation
+      document.querySelectorAll(".switch-form").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetForm = button.dataset.form;
+          const currentForm = document.querySelector(
+            ".form-container:not(.hidden)"
+          );
+          const newForm = document.getElementById(`${targetForm}-form`);
+
+          // Prevent double-clicking during animation
+          if (currentForm.classList.contains("animating")) return;
+
+          currentForm.classList.add("animating");
+          currentForm.classList.add("fade-out");
+
+          currentForm.addEventListener(
+            "animationend",
+            function handler() {
+              currentForm.classList.remove("animating");
+              currentForm.classList.add("hidden");
+              currentForm.classList.remove("fade-out");
+              currentForm.removeEventListener("animationend", handler);
+
+              requestAnimationFrame(() => {
+                newForm.classList.remove("hidden");
+                newForm.classList.add("fade-in");
+
+                newForm.addEventListener(
+                  "animationend",
+                  function cleanup() {
+                    newForm.classList.remove("fade-in");
+                    newForm.removeEventListener("animationend", cleanup);
+                  },
+                  { once: true }
+                );
+              });
+            },
+            { once: true }
+          );
+        });
+      });
+
+      // Language switching with improved animation
+      const langButtons = document.querySelectorAll(".lang-btn");
+      let isLanguageChanging = false;
+
+      langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (isLanguageChanging) return;
+          isLanguageChanging = true;
+
+          const lang = btn.dataset.lang;
+          const elements = document.querySelectorAll("[data-en]");
+          let completedAnimations = 0;
+
+          elements.forEach((el, index) => {
+            requestAnimationFrame(() => {
+              el.style.transition = `opacity var(--transition-duration) var(--transition-timing)`;
+              el.style.opacity = "0";
+
+              setTimeout(() => {
+                el.textContent = el.dataset[lang];
+                el.style.opacity = "1";
+              }, 150);
+
+              setTimeout(() => {
+                completedAnimations++;
+                if (completedAnimations === elements.length) {
+                  isLanguageChanging = false;
+                }
+              }, 300);
+            });
+          });
+
+          langButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+
+      // Theme switching with improved animation
+      const themeSwitch = document.getElementById("theme-switch");
+      const currentTheme = localStorage.getItem("theme");
+      let isThemeChanging = false;
+
+      if (currentTheme) {
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        if (currentTheme === "dark") {
+          themeSwitch.checked = true;
+        }
+      }
+
+      themeSwitch.addEventListener("change", () => {
+        if (isThemeChanging) return;
+        isThemeChanging = true;
+
+        requestAnimationFrame(() => {
+          document.body.classList.add("theme-transition");
+          const newTheme = themeSwitch.checked ? "dark" : "light";
+
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+
+          setTimeout(() => {
+            document.body.classList.remove("theme-transition");
+            isThemeChanging = false;
+          }, 300);
+        });
+      });
+    </script>
+  </body>
 </html>
