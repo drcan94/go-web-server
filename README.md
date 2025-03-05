@@ -21,8 +21,8 @@ A minimalist web application built with Go that implements a basic user authenti
 
 1. Clone the repository:
 ```bash
-git clone [your-repository-url]
-cd [repository-name]
+git clone https://github.com/drcan94/go-web-server
+cd go-web-server
 ```
 
 2. Install dependencies:
